@@ -37,7 +37,8 @@ class PostController extends Controller
             $inputs['post_image']= request('post_image')->store('storage/images');
         }
      auth()->user()->posts()->create($inputs);
-     return back();
+     Session::flash('post-created-message', 'Post was Created Successfully');
+     return redirect()->route('post.index');
     }
 
     public function destroy(Post $post){

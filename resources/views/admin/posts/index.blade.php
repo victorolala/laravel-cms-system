@@ -5,9 +5,13 @@
 
 
         @if(Session::has('message'))
-      <div class="alert alert-danger">
-        {{Session::get('message')}}
-      </div>
+        <div class="alert alert-danger">
+          {{Session::get('message')}}
+        </div>
+      @elseif(session('post-created-message'))
+        <div class="alert alert-success">
+          {{Session::get('post-created-message')}}
+        </div>
         @endif
 
         <div class="card shadow mb-4">
