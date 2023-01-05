@@ -3,6 +3,13 @@
 
         <h1>All Posts</h1>
 
+
+        @if(Session::has('message'))
+      <div class="alert alert-danger">
+        {{Session::get('message')}}
+      </div>
+        @endif
+
         <div class="card shadow mb-4">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
@@ -18,6 +25,7 @@
                       <th>Image</th>
                       <th>Created At</th>
                       <th>Updated</th>
+                      <th>Delete</th>
                       
                     </tr>
                   </thead>
@@ -28,7 +36,9 @@
                         <th>Title</th>
                         <th>Image</th>
                         <th>Created At</th>
-                        <th>Updated</th>
+                        <th>Updated At</th>
+                        <th>Delete</th>
+
                     </tr>
                   </tfoot>
                   <tbody>
@@ -51,6 +61,15 @@
                         </td>
                         <td>
                           {{ $post->updated_at ->diffForHumans() }}
+                        </td>
+                        <td>
+                          <form method="POST" action="{{route('post.destroy', $post->id)}}" enctype="multipart/form-data">
+                            @csrf
+                            @method('DELETE')
+
+                            <button class="btn btn-danger">Delete</button>
+
+                          </form>
                         </td>
 
                     </tr>

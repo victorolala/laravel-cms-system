@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
@@ -37,5 +38,11 @@ class PostController extends Controller
         }
      auth()->user()->posts()->create($inputs);
      return back();
+    }
+
+    public function destroy(Post $post){
+        $post->delete();
+        Session::flash('message', 'Post Deleted');
+        return back();
     }
 }
